@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::view('/', 'index');
-Route::view('/products','catalog-list-page');
+
+Route::get('/','IndexController@index')->name('index');
+Route::get('/products','ProductsController@index')->name('products');
+Route::get('/product-details','ProductController@show')->name('single-product');
+
 Route::view('/product','product-detail');
 Route::view('/cart','cart');
 Route::view('/checkout','checkout');
