@@ -35,7 +35,16 @@ class ProductsController extends Controller
      public function show($id){
 
         $product = Product::where('id',$id)->firstOrFail();
-        return view('product-detail')->with('product',$product);
+
+        $products = Product::inRandomOrder()->take(3)->get();
+        $categories = Category::all();
+
+        $data = array(
+        'products'=>$products,
+        'categories'=>$categories,
+        'product'=>$product);
+
+        return view('product-detail')->with($data);
      }
 
 }
