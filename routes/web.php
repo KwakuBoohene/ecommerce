@@ -22,6 +22,7 @@ Route::get('/','IndexController@index')->name('index');
 Route::get('/products','ProductsController@index')->name('products');
 Route::get('/product-detail-{id}','ProductsController@show')->name('product-detail');
 Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::get('/cart-destroy', 'CartController@empty')->name('cart.empty');
 Route::post('cart', 'CartController@store')->name('cart.store');
 
 

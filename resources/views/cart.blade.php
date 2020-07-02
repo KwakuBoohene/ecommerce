@@ -6,6 +6,8 @@
     <section class="section-pagetop bg-dark">
         <div class="container clearfix">
             <h2 class="title-page">Cart</h2>
+
+
         </div> <!-- container //  -->
     </section>
     <!-- ========================= SECTION INTRO END// ========================= -->
@@ -14,7 +16,39 @@
         <div class="container">
 
             <div class="row">
+
+
+
                 <main class="col-sm-9">
+
+                    <div class="">
+                        @if (session()->has('success_message'))
+                            <div class="alert alert-success">
+                                {{session()->get('success_message')}}
+                            </div>
+                        @endif
+
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+
+                        @if (Cart::count() > 0)
+                            <div class="alert alert-primary">
+                                You have {{Cart::count()}} item(s) in you cart
+                            </div>
+                        @else
+                        <div class="alert alert-secondary">
+                            You have {{Cart::count()}} item(s) in you cart
+                        </div>
+                        @endif
+                    </div>
 
                     <div class="card">
                         <table class="table table-hover shopping-cart-wrap">
@@ -27,12 +61,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($cartItems as $item)
                                 <tr>
                                     <td>
                                         <figure class="media">
-                                            <div class="img-wrap"><img src="images/items/1.jpg" class="img-thumbnail img-sm"></div>
+                                            <div class="img-wrap"><img src={{$item->model->image}} class="img-thumbnail img-sm"></div>
                                             <figcaption class="media-body">
-                                                <h6 class="title text-truncate">Product name goes here </h6>
+
+                                                <h6 class="title text-truncate">{{$item->model->name}}   </h6>
                                                 <dl class="dlist-inline small">
                                                     <dt>Size: </dt>
                                                     <dd>XXL</dd>
@@ -54,8 +90,8 @@
                                     </td>
                                     <td>
                                         <div class="price-wrap">
-                                            <var class="price">USD 145</var>
-                                            <small class="text-muted">(USD5 each)</small>
+                                        <var class="price">GHC {{$item->price}}.00</var>
+
                                         </div>
                                         <!-- price-wrap .// -->
                                     </td>
@@ -64,80 +100,10 @@
                                         <a href="" class="btn btn-outline-danger"> × Remove</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <figure class="media">
-                                            <div class="img-wrap"><img src="images/items/2.jpg" class="img-thumbnail img-sm"></div>
-                                            <figcaption class="media-body">
-                                                <h6 class="title text-truncate">Product name goes here </h6>
-                                                <dl class="dlist-inline small">
-                                                    <dt>Size: </dt>
-                                                    <dd>XXL</dd>
-                                                </dl>
-                                                <dl class="dlist-inline small">
-                                                    <dt>Color: </dt>
-                                                    <dd>Orange color</dd>
-                                                </dl>
-                                            </figcaption>
-                                        </figure>
-                                    </td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div class="price-wrap">
-                                            <var class="price">USD 35</var>
-                                            <small class="text-muted">(USD10 each)</small>
-                                        </div>
-                                        <!-- price-wrap .// -->
-                                    </td>
-                                    <td class="text-right">
-                                        <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                        <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <figure class="media">
-                                            <div class="img-wrap"><img src="images/items/3.jpg" class="img-thumbnail img-sm"></div>
-                                            <figcaption class="media-body">
-                                                <h6 class="title text-truncate">Product name goes here </h6>
-                                                <dl class="dlist-inline small">
-                                                    <dt>Size: </dt>
-                                                    <dd>XXL</dd>
-                                                </dl>
-                                                <dl class="dlist-inline small">
-                                                    <dt>Color: </dt>
-                                                    <dd>Orange color</dd>
-                                                </dl>
-                                            </figcaption>
-                                        </figure>
-                                    </td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div class="price-wrap">
-                                            <var class="price">USD 45</var>
-                                            <small class="text-muted">(USD15 each)</small>
-                                        </div>
-                                        <!-- price-wrap .// -->
-                                    </td>
-                                    <td class="text-right">
-                                        <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                        <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                                    </td>
-                                </tr>
+
+                                @endforeach
+
+
                             </tbody>
                         </table>
                     </div>

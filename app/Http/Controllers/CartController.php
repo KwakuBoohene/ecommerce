@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
+
+
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -16,8 +20,13 @@ class CartController extends Controller
     {
         //
         $categories = Category::inRandomOrder()->get();
+        $cartItems = Cart::content();
+        $data = array(
+            'cartItems' => $cartItems,
+            'categories' => $categories
+        );
 
-        return view('cart')->with('categories',$categories);
+        return view('cart')->with($data);
     }
 
     /**
@@ -39,7 +48,8 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
-        Cart::add($request->id,$request->name,$request->quantity,$request->price)->associate('App\Product');
+        $product = Product::where('id',$request->id)->firstOrFail();
+        Cart::add($product->id,$product->name,1,$product->price)->associate('App\Product');
 
         return redirect()->route('cart.index')->with('success_message','Item was added to your cart');
     }
@@ -87,5 +97,9 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function empty(){
+        Cart::destroy();
     }
 }
