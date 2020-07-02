@@ -121,8 +121,7 @@
                                     </div> --}}
                                     <!-- row.// -->
                                     <hr>
-                                    <a href="#" class="btn  btn-primary"> Buy now </a>
-                                    <form action={{ route('cart.store') }} method="post">
+                                    <form action={{ route('cart.store') }} method="post" class="float-left mr-1">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="id" value={{$product->id}}>
                                     <button type="submit" class="btn btn-outline-primary">

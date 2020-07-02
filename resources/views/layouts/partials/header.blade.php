@@ -32,7 +32,7 @@
                             <div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-shopping-cart"></i></div>
                             <div class="text-wrap">
                                 <small>Basket</small>
-                                <span>3 items</span>
+                                <span>{{Cart::instance('default')->count() }} items </span>
                             </div>
                         </a>
                     </div>

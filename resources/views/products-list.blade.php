@@ -120,7 +120,14 @@
                                     <p class="text-success">Free shipping</p>
                                     <br>
                                     <p>
-                                        <a href={{ route('product-detail', $product->id) }} class="btn btn-primary"> Buy now </a>
+                                        <form action={{ route('cart.store') }} method="post" class="float-right">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="id" value={{$product->id}}>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-shopping-cart"></i> Add to cart
+                                            </button>
+                                            </form>
+
                                         <a href={{ route('product-detail', $product->id) }} class="btn btn-secondary"> Details  </a>
                                     </p>
                                 </div>

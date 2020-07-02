@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Product;
+
+use Illuminate\Http\Request;
 use App\Category;
+use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 
-
-use Illuminate\Http\Request;
-
-class CartController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +18,14 @@ class CartController extends Controller
     public function index()
     {
         //
-        $categories = Category::inRandomOrder()->get();
-        $cartItems = Cart::content();
-        $data = array(
-            'cartItems' => $cartItems,
-            'categories' => $categories
-        );
 
-        return view('cart')->with($data);
+        $products = Product::OtherProducts();
+        $categories = Category::all();
+
+        $data = array('products'=>$products,
+        'categories'=>$categories);
+
+        return view('checkout')->with($data);
     }
 
     /**
@@ -48,19 +47,6 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
-        $product = Product::where('id',$request->id)->firstOrFail();
-        $duplicates = Cart::search(function($cartItem, $rowId) use ($product){
-            return $cartItem->id === $product->id;
-        });
-
-        if($duplicates->isNotEmpty()){
-            return redirect()->route('cart.index')->with('success_message','Item is already in your cart');
-        }else{
-            Cart::add($product->id,$product->name,1,$product->price)->associate('App\Product');
-        }
-
-
-        return redirect()->route('cart.index')->with('success_message','Item was added to your cart');
     }
 
     /**
@@ -106,12 +92,5 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
-        Cart::remove($id);
-
-        return back()->with('success_message','Item has been removed');
-    }
-
-    public function empty(){
-        Cart::destroy();
     }
 }

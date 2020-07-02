@@ -43,23 +43,31 @@
                             <div class="alert alert-primary">
                                 You have {{Cart::count()}} item(s) in you cart
                             </div>
+                        </div>
+
+                        <div class="card">
+                            <table class="table table-hover shopping-cart-wrap">
+                                <thead class="text-muted">
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col" width="120">Quantity</th>
+                                        <th scope="col" width="120">Price</th>
+                                        <th scope="col" class="text-right" width="200">Action</th>
+                                    </tr>
+                                </thead>
                         @else
                         <div class="alert alert-secondary">
                             You have {{Cart::count()}} item(s) in you cart
                         </div>
-                        @endif
                     </div>
-
                     <div class="card">
                         <table class="table table-hover shopping-cart-wrap">
                             <thead class="text-muted">
-                                <tr>
-                                    <th scope="col">Product</th>
-                                    <th scope="col" width="120">Quantity</th>
-                                    <th scope="col" width="120">Price</th>
-                                    <th scope="col" class="text-right" width="200">Action</th>
-                                </tr>
                             </thead>
+                        @endif
+
+
+
                             <tbody>
                                 @foreach ($cartItems as $item)
                                 <tr>
@@ -97,7 +105,12 @@
                                     </td>
                                     <td class="text-right">
                                         <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                        <a href="" class="btn btn-outline-danger"> × Remove</a>
+
+                                        <form action={{ route('cart.destroy', $item->rowId) }} method="post" class="float-right ml-2">
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-outline-danger" type="submit"> × Remove</button>
+                                        </form>
                                     </td>
                                 </tr>
 
@@ -115,15 +128,15 @@
                     <p class="alert alert-success">Add USD 5.00 of eligible items to your order to qualify for FREE Shipping. </p>
                     <dl class="dlist-align">
                         <dt>Total price: </dt>
-                        <dd class="text-right">USD 568</dd>
+                        <dd class="text-right">GHC {{Cart::subtotal()}} </dd>
                     </dl>
                     <dl class="dlist-align">
-                        <dt>Discount:</dt>
-                        <dd class="text-right">USD 658</dd>
+                        <dt>Tax: </dt>
+                        <dd class="text-right">GHS {{Cart::tax()}} </dd>
                     </dl>
                     <dl class="dlist-align h4">
                         <dt>Total:</dt>
-                        <dd class="text-right"><strong>USD 1,650</strong></dd>
+                        <dd class="text-right"><strong>GHS {{Cart::total()}} </strong></dd>
                     </dl>
                     <hr>
                     <figure class="itemside mb-3">
@@ -139,7 +152,7 @@
                             <br> Lorem ipsum dolor
                         </div>
                     </figure>
-                    <a href="#" class="btn btn-success btn-lg btn-block">Proceed To Checkout</a>
+                    <a href= {{ route('checkout.index') }} class="btn btn-success btn-lg btn-block">Proceed To Checkout</a>
                 </aside>
                 <!-- col.// -->
             </div>

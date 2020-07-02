@@ -62,11 +62,21 @@
                         <!-- rating-wrap.// -->
                     </figcaption>
                     <div class="bottom-wrap">
-                        <a href="" class="btn btn-sm btn-primary float-right">Add To Cart</a>
-                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1">Detail</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">GHC {{$product->price}}.00 </span>
-                        </div>
+                            <span class="price-new"> GHC {{$product->price}}.00 </span>
+                            </div>
+                        <span>
+                            <form action={{ route('cart.store') }} method="post" class="float-right">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value={{$product->id}}>
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                </button>
+                                </form>
+                            <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1"> Details  </a>
+                        </span>
+
+
                         <!-- price-wrap.// -->
                     </div>
                     <!-- bottom-wrap.// -->
@@ -112,11 +122,21 @@
                         <!-- rating-wrap.// -->
                     </figcaption>
                     <div class="bottom-wrap">
-                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-primary float-right">Add To Cart</a>
-                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1"> Details  </a>
                         <div class="price-wrap h5">
-                        <span class="price-new"> GHC {{$product->price}}.00 </span>
-                        </div>
+                            <span class="price-new"> GHC {{$product->price}}.00 </span>
+                            </div>
+                        <span>
+                            <form action={{ route('cart.store') }} method="post" class="float-right">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value={{$product->id}}>
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                </button>
+                                </form>
+                            <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1"> Details  </a>
+                        </span>
+
+
                         <!-- price-wrap.// -->
                     </div>
                     <!-- bottom-wrap.// -->
