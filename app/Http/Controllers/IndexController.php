@@ -18,7 +18,7 @@ class IndexController extends Controller
         //
         $products = Product::inRandomOrder()->take(3)->get();
         $products2 = Product::inRandomOrder()->take(4)->get();
-        $categories = Category::inRandomOrder()->take(3)->get();
+        $categories = Category::inRandomOrder()->get();
 
         $data = array('products'=>$products,
         'products2'=>$products2,

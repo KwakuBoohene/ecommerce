@@ -3,8 +3,11 @@
         <div class="row align-items-center">
             <div class="col-lg-3">
                 <div class="brand-wrap">
-                    <img class="logo" src="images/logo-dark.png">
+                    <a href={{ route('index') }}>
+                        <img class="logo" src="images/logo-dark.png">
                     <h2 class="logo-text">LOGO</h2>
+                    </a>
+
                 </div>
                 <!-- brand-wrap.// -->
             </div>
@@ -25,7 +28,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="widgets-wrap d-flex justify-content-end">
                     <div class="widget-header">
-                        <a href="#" class="icontext">
+                        <a href={{ route('cart.index') }} class="icontext">
                             <div class="icon-wrap icon-xs bg2 round text-secondary"><i class="fa fa-shopping-cart"></i></div>
                             <div class="text-wrap">
                                 <small>Basket</small>

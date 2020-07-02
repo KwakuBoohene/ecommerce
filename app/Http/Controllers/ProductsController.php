@@ -17,7 +17,7 @@ class ProductsController extends Controller
     {
         //
 
-        $products = Product::inRandomOrder()->take(3)->get();
+        $products = Product::OtherProducts();
         $categories = Category::all();
 
         $data = array('products'=>$products,
@@ -36,7 +36,7 @@ class ProductsController extends Controller
 
         $product = Product::where('id',$id)->firstOrFail();
 
-        $products = Product::inRandomOrder()->take(3)->get();
+        $products = Product::OtherProducts();
         $categories = Category::all();
 
         $data = array(
@@ -46,5 +46,7 @@ class ProductsController extends Controller
 
         return view('product-detail')->with($data);
      }
+
+
 
 }

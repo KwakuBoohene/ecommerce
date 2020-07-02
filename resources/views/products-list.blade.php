@@ -120,8 +120,8 @@
                                     <p class="text-success">Free shipping</p>
                                     <br>
                                     <p>
-                                        <a href="#" class="btn btn-primary"> Buy now </a>
-                                        <a href="#" class="btn btn-secondary"> Details  </a>
+                                        <a href={{ route('product-detail', $product->id) }} class="btn btn-primary"> Buy now </a>
+                                        <a href={{ route('product-detail', $product->id) }} class="btn btn-secondary"> Details  </a>
                                     </p>
                                 </div>
                                 <!-- action-wrap.// -->

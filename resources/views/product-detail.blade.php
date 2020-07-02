@@ -122,7 +122,13 @@
                                     <!-- row.// -->
                                     <hr>
                                     <a href="#" class="btn  btn-primary"> Buy now </a>
-                                    <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                                    <form action={{ route('cart.store') }} method="post">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-outline-primary">
+                                        <i class="fas fa-shopping-cart"></i> Add to cart
+                                    </button>
+                                    </form>
+                                    {{-- <a href="#" class="btn  btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to cart </a> --}}
                                 </article>
                                 <!-- card-body.// -->
                             </aside>
@@ -163,22 +169,11 @@
                         <figcaption class="info-wrap">
                         <h4 class="title">{{$p->name}}</h4>
                         <p class="desc">{{$p->details}}</p>
-                            <div class="rating-wrap">
-                                <ul class="rating-stars">
-                                    <li style="width:80%" class="stars-active">
-                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <div class="label-rating">132 reviews</div>
-                                <div class="label-rating">154 orders </div>
-                            </div>
+
                             <!-- rating-wrap.// -->
                         </figcaption>
                         <div class="bottom-wrap">
-                            <a href="" class="btn btn-sm btn-primary float-right">Add To Cart</a>
+                            <a href={{ route('product-detail', $p->id ) }} class="btn btn-sm btn-secondary float-right">Details</a>
                             <div class="price-wrap h5">
                                 <span class="price-new">GHC {{$p->price}}.00</span>
                             </div>

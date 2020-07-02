@@ -11,19 +11,19 @@
             <h4 class="title-section bg">Featured Categories</h4>
         </header>
         <div class="row">
-            @foreach ($categories as $category)
+            @for ($i = 0; $i < 3; $i++)
             <div class="col-md-4">
-                <div class="card-banner" style="height:250px; background-image: url({{$category->image}});">
+                <div class="card-banner" style="height:250px; background-image: url({{$categories[$i]->image}});">
                     <article class="overlay overlay-cover d-flex align-items-center justify-content-center">
                         <div class="text-center">
-                        <h5 class="card-title"> {{$category->name}}</h5>
+                        <h5 class="card-title"> {{$categories[$i]->name}}</h5>
                             <a href="#" class="btn btn-warning btn-sm"> View All </a>
                         </div>
                     </article>
                 </div>
                 <!-- card.// -->
             </div>
-            @endforeach
+            @endfor
 
 
 
@@ -63,6 +63,7 @@
                     </figcaption>
                     <div class="bottom-wrap">
                         <a href="" class="btn btn-sm btn-primary float-right">Add To Cart</a>
+                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1">Detail</a>
                         <div class="price-wrap h5">
                             <span class="price-new">GHC {{$product->price}}.00 </span>
                         </div>
@@ -111,7 +112,8 @@
                         <!-- rating-wrap.// -->
                     </figcaption>
                     <div class="bottom-wrap">
-                        <a href="" class="btn btn-sm btn-primary float-right">Add To Cart</a>
+                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-primary float-right">Add To Cart</a>
+                        <a href={{ route('product-detail', $product->id) }} class="btn btn-sm btn-secondary float-right mr-1"> Details  </a>
                         <div class="price-wrap h5">
                         <span class="price-new"> GHC {{$product->price}}.00 </span>
                         </div>
